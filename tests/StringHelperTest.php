@@ -33,7 +33,17 @@ class StringHelperTest extends TestCase
         $this->assertEquals('Olleh gib-Dlrow htiw lla-pes`srotAra', $reversed);
     }
 
-    
+    public function testReverseStringUnderscore()
+    {
+        $reversed = $this->stringHelper->reverseString('Hello underscore_in_word');
+        $this->assertEquals('Olleh drow_ni_erocsrednu', $reversed);
+    }
+
+    public function testReverseStringWitDots()
+    {
+        $reversed = $this->stringHelper->reverseString('Hello String.with.dots');
+        $this->assertEquals('Olleh Stod.htiw.gnirts', $reversed);
+    }
 
 
     public function testReverseStringPunctuationMarks()

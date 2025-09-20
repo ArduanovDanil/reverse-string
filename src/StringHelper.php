@@ -53,7 +53,7 @@ private function reverseChars(array $chars): string
             }
            
             $rev = mb_strtolower($rev);
-            if (mb_strtoupper($char) === $char) {
+            if (preg_match('/^\p{L}+$/u', $char) && mb_strtoupper($char) === $char) {
                 $rev = mb_strtoupper($rev);
             }
             array_push($result, $rev);
