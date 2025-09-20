@@ -27,6 +27,15 @@ class StringHelperTest extends TestCase
         $this->assertEquals('Olleh Dlrow', $reversed);
     }
 
+    public function testReverseStringWithSeparators()
+    {
+        $reversed = $this->stringHelper->reverseString('Hello big-World with all-sep`aratOrs');
+        $this->assertEquals('Olleh gib-Dlrow htiw lla-pes`srotAra', $reversed);
+    }
+
+    
+
+
     public function testReverseStringPunctuationMarks()
     {
         $reversed = $this->stringHelper->reverseString("is 'cold' now это «Так» \"просто\"");
