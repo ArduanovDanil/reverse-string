@@ -1,59 +1,33 @@
 <?php
-//echo 123;
+declare(strict_types = 1);
 
-//$keywords = preg_split("/[\-\`+]+/", "lang`uag`e", PREG_SPLIT_DELIM_CAPTURE);
+namespace App;
 
-//$keywords = preg_split("/([\`\-]+)/", "hype-r`русс", -1, PREG_SPLIT_DELIM_CAPTURE|PREG_SPLIT_NO_EMPTY);
-//print_r($keywords);
-//die;
+class StringHelper
+{
 
-/*
-$text = 'asdf';
-$res = preg_split('//u', $text, -1, PREG_SPLIT_NO_EMPTY);
-$reversed = array_reverse($res);
-print_r($reversed);
-die;
- */
-
-//preg_match('/(\/)(bar)(baz)/', 'fooba/rbaz', $matches, PREG_OFFSET_CAPTURE);
-//print_r($matches);
-
-//die;
-
-//$str = 'sdfe44';
-//$res = ctype_alnum($str);
-//$res = preg_match('/^[\w.-]+$/u', $str);
-//var_dump($res);
-//die;
-
-
-//$string = "З!и:муш:`ка: It`s Зима: Hello World! It`s very good";
+    //$string = "З!и:муш:`ка: It`s Зима: Hello World! It`s very good";
 //$string = "З!и:ма: It`s Зима: Hello World! It`s very good";
-$string = 'это «Так» "просто"';
-
-function reverseString(string $string)
+    private string $testString = 'это «Так» "просто"';
+public function reverseString(string $string): string
 {
     $words = explode(' ', $string);
     $reversedString = '';
     foreach ($words as $word) {
-       
         $keywords = preg_split("/([\`\-]+)/", $word, -1, PREG_SPLIT_DELIM_CAPTURE|PREG_SPLIT_NO_EMPTY);
-
         $reversedWord = '';
         foreach($keywords as $keyword) {
             $chars = preg_split('//u', $keyword, -1, PREG_SPLIT_NO_EMPTY);
-            $reversedWord .= reverseChars($chars);
+            $reversedWord .= $this->reverseChars($chars);
         }
-
         $reversedString .=  empty($reversedString) ? $reversedWord : " $reversedWord";
     }
-    var_dump($reversedString);
+    return $reversedString;
 
 }
 
-function reverseChars(array $chars): string
+private function reverseChars(array $chars): string
 {
-
     $reversed = array_reverse($chars);
 
     $result = [];
@@ -94,6 +68,6 @@ function reverseChars(array $chars): string
     return implode($result);
 }
 
-$reversed = reverseString($string);
 
-echo $reversed;
+
+}
