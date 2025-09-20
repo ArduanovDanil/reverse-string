@@ -6,9 +6,6 @@ namespace App;
 class StringHelper
 {
 
-    //$string = "З!и:муш:`ка: It`s Зима: Hello World! It`s very good";
-//$string = "З!и:ма: It`s Зима: Hello World! It`s very good";
-    private string $testString = 'это «Так» "просто"';
 public function reverseString(string $string): string
 {
     $words = explode(' ', $string);
@@ -28,6 +25,7 @@ public function reverseString(string $string): string
 
 private function reverseChars(array $chars): string
 {
+    $charsCount = count($chars);
     $reversed = array_reverse($chars);
 
     $result = [];
@@ -35,16 +33,14 @@ private function reverseChars(array $chars): string
 
     foreach ($reversed as $rev) {
 
-         if(!preg_match('/^[\w.-]+$/u', $rev)) {
-            if(empty($result)) {
+         if(empty($result)&& !preg_match('/^[\w-]+$/u', $rev)) {
                 array_unshift($endOfNonAlphaNum, $rev);
-            }
             continue;
          }
 
         while(null !== $char = array_shift($chars)) {
 
-            if(!preg_match('/^[\w.-]+$/u', $char)) {
+            if(!preg_match('/^[\w-]+$/u', $char)) {
                 array_push($result, $char);
                 if($char === $rev) {
                     break;
@@ -61,13 +57,11 @@ private function reverseChars(array $chars): string
         }
     }
 
-    if($endOfNonAlphaNum) {
+    if($charsCount > count($result) && $endOfNonAlphaNum) {
         $result = array_merge($result, $endOfNonAlphaNum);
     }
 
     return implode($result);
 }
-
-
 
 }

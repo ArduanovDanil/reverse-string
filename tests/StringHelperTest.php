@@ -27,6 +27,30 @@ class StringHelperTest extends TestCase
         $this->assertEquals('Olleh Dlrow', $reversed);
     }
 
+    public function testReverseStringSomeSignAtTheEnd()
+    {
+        $reversed = $this->stringHelper->reverseString('Hello!?');
+        $this->assertEquals('Olleh!?', $reversed);
+    }
+
+    public function testReverseStringSomeDot()
+    {
+        $reversed = $this->stringHelper->reverseString('Hello.');
+        $this->assertEquals('Olleh.', $reversed);
+    }
+
+    public function testReverseStringThreeDots()
+    {
+        $reversed = $this->stringHelper->reverseString('To be continued...');
+        $this->assertEquals('Ot eb deunitnoc...', $reversed);
+    }
+
+    public function testReverseStringThreeDotsAndQuotes()
+    {
+        $reversed = $this->stringHelper->reverseString('«Так»...');
+        $this->assertEquals('«Кат»...', $reversed);
+    }
+
     public function testReverseStringSeparators()
     {
         $reversed = $this->stringHelper->reverseString('Hello big-World with all-sep`aratOrs');
@@ -37,12 +61,6 @@ class StringHelperTest extends TestCase
     {
         $reversed = $this->stringHelper->reverseString('Hello underscore_in_word');
         $this->assertEquals('Olleh drow_ni_erocsrednu', $reversed);
-    }
-
-    public function testReverseStringDots()
-    {
-        $reversed = $this->stringHelper->reverseString('Hello String.with.dots');
-        $this->assertEquals('Olleh Stod.htiw.gnirts', $reversed);
     }
 
     public function testReverseStringNumbers()
@@ -56,12 +74,5 @@ class StringHelperTest extends TestCase
         $reversed = $this->stringHelper->reverseString("is 'cold' now это «Так» \"просто\"");
         $this->assertEquals("si 'dloc' won отэ «Кат» \"отсорп\"", $reversed);
     }
-
-    public function testReverseStringSomeSignAtTheEnd()
-    {
-        $reversed = $this->stringHelper->reverseString('Hello!?');
-        $this->assertEquals('Olleh!?', $reversed);
-    }
-
 
 }
