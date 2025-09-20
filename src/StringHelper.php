@@ -37,7 +37,7 @@ private function reverseChars(array $chars): string
 
          if(!preg_match('/^[\w.-]+$/u', $rev)) {
             if(empty($result)) {
-                $endOfNonAlphaNum[] = $rev;
+                array_unshift($endOfNonAlphaNum, $rev);
             }
             continue;
          }
