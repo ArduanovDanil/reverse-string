@@ -26,28 +26,23 @@ class StringHelper
     private function reverseChars(array $chars): string
     {
         $charsCount = count($chars);
+        $nonAlphaNumStart = [];
+        $nonAlphaNumEnd = [];
+        $result = [];
+
+        if (!preg_match('/^[\w-]+$/u', $chars[0])) {
+            $nonAlphaNumStart[] = array_shift($chars);
+        }
+
         $reversed = array_reverse($chars);
 
-        $result = [];
-        $endOfNonAlphaNum = [];
-
         foreach ($reversed as $rev) {
-
             if (empty($result) && !preg_match('/^[\w-]+$/u', $rev)) {
-                array_unshift($endOfNonAlphaNum, $rev);
+                array_unshift($nonAlphaNumEnd, $rev);
                 continue;
             }
 
             while (null !== $char = array_shift($chars)) {
-
-                if (!preg_match('/^[\w-]+$/u', $char)) {
-                    array_push($result, $char);
-                    if ($char === $rev) {
-                        break;
-                    }
-                    continue;
-                }
-
                 $rev = mb_strtolower($rev);
                 if (preg_match('/^\p{L}+$/u', $char) && mb_strtoupper($char) === $char) {
                     $rev = mb_strtoupper($rev);
@@ -57,8 +52,12 @@ class StringHelper
             }
         }
 
-        if ($charsCount > count($result) && $endOfNonAlphaNum) {
-            $result = array_merge($result, $endOfNonAlphaNum);
+        if ($charsCount > count($result) && $nonAlphaNumStart) {
+            $result = array_merge($nonAlphaNumStart, $result);
+        }
+
+        if ($charsCount > count($result) && $nonAlphaNumEnd) {
+            $result = array_merge($result, $nonAlphaNumEnd);
         }
 
         return implode($result);

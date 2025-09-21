@@ -33,10 +33,28 @@ class StringHelperTest extends TestCase
         $this->assertEquals('Olleh!?', $reversed);
     }
 
-    public function testReverseStringSomeDot()
+    public function testReverseStringDot()
     {
         $reversed = $this->stringHelper->reverseString('Hello.');
         $this->assertEquals('Olleh.', $reversed);
+    }
+
+    public function testReverseStringOnlyDots()
+    {
+        $reversed = $this->stringHelper->reverseString('String.with.dots');
+        $this->assertEquals('Stod.htiw.gnirts', $reversed);
+    }
+
+    public function testReverseStringDots()
+    {
+        $reversed = $this->stringHelper->reverseString('Откройте site.dot.com в новом окне');
+       $this->assertEquals('Етйоркто moc.tod.etis в мовон енко', $reversed);
+    }
+
+    public function testReverseStringStar()
+    {
+        $reversed = $this->stringHelper->reverseString('*star');
+       $this->assertEquals('*rats', $reversed);
     }
 
     public function testReverseStringThreeDots()
